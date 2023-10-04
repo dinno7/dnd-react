@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html,
+	body {
+		@apply overflow-hidden;
+	}
+	body {
+		@apply box-border p-0 m-0 bg-slate-950 text-slate-50;
+		font-family: 'Exo 2', 'Vazirmatn', sans-serif;
+	}
+	* {
+		scroll-behavior: smooth;
+	}
+	body {
+		overflow-y: hidden;
+	}
+
+	*::-webkit-scrollbar {
+		width: 0.6rem;
+	}
+	*::-webkit-scrollbar:horizontal {
+		height: 0.6rem;
+	}
+	*::-webkit-scrollbar-track {
+		@apply bg-slate-700;
+	}
+	*::-webkit-scrollbar-thumb {
+		@apply rounded-full bg-blue-500/60;
+	}
+
+	textarea::-webkit-scrollbar {
+		width: 0.3rem;
+	}
+	textarea::-webkit-scrollbar:horizontal {
+		height: 0.3rem;
+	}
+	textarea::-webkit-scrollbar-track {
+		@apply bg-slate-700;
+	}
+	textarea::-webkit-scrollbar-thumb {
+		@apply rounded-full bg-red-300/60;
+	}
+}
