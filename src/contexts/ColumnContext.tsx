@@ -10,7 +10,7 @@ interface Props {
 
 interface ColumnContext {
 	columns: Column[];
-	setColumns: Column[] | React.Dispatch<React.SetStateAction<Column[]>>;
+	setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
 	activeColumn: Column | null;
 	setActiveColumn: React.Dispatch<React.SetStateAction<Column | null>>;
 	columnsId: ID[];
@@ -33,7 +33,7 @@ const Context = createContext<ColumnContext>({
 });
 
 function ColumnContext({ children }: Props) {
-	const [columns, setColumns] = useLocalStorage<Column[]>([], 'columns');
+	const { data: columns, setData: setColumns } = useLocalStorage<Column[]>([], 'columns');
 	const [activeColumn, setActiveColumn] = useState<Column | null>(null);
 
 	const columnsId = useMemo(() => columns.map((c) => c.id), [columns]);
@@ -45,7 +45,7 @@ function ColumnContext({ children }: Props) {
 			title: `Column - ${columns.length + 1}`,
 		};
 
-		setColumns((columns) => [...columns, newColumn]);
+		setColumns((columns: Column[]) => [...columns, newColumn]);
 
 		setTimeout(() => {
 			const newColumnEl = document.getElementById(id);

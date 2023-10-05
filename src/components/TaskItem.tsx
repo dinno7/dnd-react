@@ -31,7 +31,7 @@ function TaskItem({ task }: Props) {
 	if (isDragging) {
 		return (
 			<div
-				id={task.id}
+				id={task.id + ''}
 				ref={setNodeRef}
 				style={style}
 				className="p-3 rounded-lg min-h-[6.5rem] bg-blue-900/40 border-2 border-blue-500"></div>
@@ -39,23 +39,22 @@ function TaskItem({ task }: Props) {
 	}
 	if (isEditMode)
 		return (
-			<div
-				onKeyDown={(e) => {
-					if (e.key === 'Escape') {
-						setIsEditMode(false);
-						return updateTask(task.id, task.content);
-					}
-					if (e.ctrlKey && e.key === 'Enter') {
-						updateTask(task.id, e.target?.value?.trim());
-						setIsEditMode(false);
-					}
-				}}
-				onBlur={(e) => {
-					updateTask(task.id, e.target?.value?.trim());
-					setIsEditMode(false);
-				}}
-				className="group p-3 rounded-lg min-h-[6.5rem] bg-gray-900 elative border-l-2 border-l-red-300/60">
+			<div className="group p-3 rounded-lg min-h-[6.5rem] bg-gray-900 elative border-l-2 border-l-red-300/60">
 				<textarea
+					onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+						if (e.key === 'Escape') {
+							setIsEditMode(false);
+							return updateTask(task.id, task.content);
+						}
+						if (e.ctrlKey && e.key === 'Enter') {
+							updateTask(task.id, (e.target as HTMLTextAreaElement).value?.trim());
+							setIsEditMode(false);
+						}
+					}}
+					onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {
+						updateTask(task.id, (e.target as HTMLTextAreaElement).value?.trim());
+						setIsEditMode(false);
+					}}
 					autoFocus
 					dir="auto"
 					defaultValue={task.content}

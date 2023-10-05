@@ -35,21 +35,20 @@ const Context = createContext<TaskContextTypes>({
 });
 
 function TaskContext({ children }: Props) {
-	const [tasks, setTasks] = useLocalStorage([], 'tasks');
+	const { data: tasks, setData: setTasks } = useLocalStorage<Task[]>([], 'tasks');
 	const [activeTask, setActiveTask] = useState<Task | null>(null);
 
-	const tasksId = useMemo(() => tasks?.map((c) => c.id), [tasks]);
+	const tasksId = useMemo(() => tasks?.map((t: Task) => t.id), [tasks]);
 
 	function addNewTask(columnId: ID) {
 		const id = generateId();
 		const newTask: Task = {
 			id,
 			columnId,
-			date: new Date(),
 			content: `Task - ${tasks.length + 1}`,
 		};
 
-		setTasks((tasks) => [...tasks, newTask]);
+		setTasks((tasks: Task[]) => [...tasks, newTask]);
 
 		setTimeout(() => {
 			const newTaskEl = document.getElementById(id);

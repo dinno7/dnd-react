@@ -22,14 +22,14 @@ import TaskItem from './TaskItem';
 function Board() {
 	const { columns, setColumns, activeColumn, setActiveColumn } = useColumns();
 	const { activeTask, setActiveTask, tasks, setTasks } = useTasks();
-	const containerRef = useRef<HTMLDListElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		function handleFn(e: WheelEvent) {
+		function handleFn(e: any) {
 			if (!containerRef.current) return;
 
 			const hasHorizontalScroll = containerRef.current.clientWidth >= window.innerWidth;
-			if (!hasHorizontalScroll || e.target.id !== 'container') return;
+			if (!hasHorizontalScroll || e.target?.id !== 'container') return;
 			containerRef.current.scrollLeft += e.deltaY * 5;
 		}
 

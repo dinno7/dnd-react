@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { KeyboardEvent, useEffect, useState } from 'react';
+import { KeyboardEvent, useState } from 'react';
 import { HiOutlinePlusCircle, HiOutlineTrash, HiXCircle } from 'react-icons/hi2';
 
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
@@ -37,7 +36,7 @@ function ColumnItem({ column }: ColumnItemProps) {
 	if (isDragging) {
 		return (
 			<div
-				id={column.id}
+				id={column.id + ''}
 				ref={setNodeRef}
 				style={style}
 				className="overflow-hidden rounded-lg w-[25rem] bg-blue-500/20 h-[35rem] border-2 border-blue-500/80"></div>
@@ -46,7 +45,7 @@ function ColumnItem({ column }: ColumnItemProps) {
 
 	return (
 		<div
-			id={column.id}
+			id={column.id + ''}
 			// initial={isFirst ? { opacity: 0, scale: 0.5, y: '-500px' } : {}}
 			// animate={isFirst ? { opacity: 1, scale: 1, y: 0 } : {}}
 			// transition={isFirst ? { easings: true, duration: 0.3 } : {}}

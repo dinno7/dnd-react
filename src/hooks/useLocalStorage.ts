@@ -12,7 +12,7 @@ function useLocalStorage<T>(initialValue: T, key: string) {
 		localStorage.setItem(key, JSON.stringify(data));
 	}, [data, key]);
 
-	return [data, setData];
+	return { data, setData };
 }
 
 export default useLocalStorage;
